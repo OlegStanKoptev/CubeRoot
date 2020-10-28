@@ -10,6 +10,7 @@
 
 ### Пример работы
 Ниже представлены несколько вариантов входных данных и соответствующие результаты исполнения:
+
 Исходное число: 8, результат: 2.011
 ![picture 1](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/1.png)
 Исходное число: 970299, результат: 99
@@ -20,6 +21,8 @@
 ![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
 Исходное число: 99999999999999, результат: 46415.888
 ![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
+
+Во всех случаях вычисленное значение лежит в области допустимой погрешности
 
 ```Assembly
 format ELF64
