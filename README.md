@@ -10,10 +10,15 @@
 
 ### Пример работы
 Ниже представлены несколько вариантов входных данных и соответствующие результаты исполнения:
+Исходное число: 8, результат: 2.011
 ![picture 1](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/1.png)
+Исходное число: 970299, результат: 99
 ![picture 2](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/2.png)
+Исходное число: -27, результат: -3.037
 ![picture 3](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/3.png)
+Исходное число: 0, результат: 0
 ![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
+Исходное число: 99999999999999, результат: 46415.888
 ![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
 
 ```Assembly
