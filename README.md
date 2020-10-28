@@ -21,15 +21,15 @@
 ### Пример работы
 Ниже представлены несколько вариантов входных данных и соответствующие результаты исполнения:
 
-Исходное число: 8, результат: 2.000056
+Исходное число: 8, результат: 2.000000
 ![picture 1](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/1.png)
-Исходное число: 970299, результат: 99.000044
+Исходное число: 970299, результат: 99.000000
 ![picture 2](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/2.png)
-Исходное число: -27, результат: -3.000454
+Исходное число: -27, результат: -3.000000
 ![picture 3](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/3.png)
-Исходное число: 0, результат: 0
+Исходное число: 0, результат: nan (потому что при сравнении точности есть деление на значение элемента)
 ![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
-Исходное число: 99999999999999, результат: 46416.322430
+Исходное число: 99999999999999, результат: 46415.888340
 ![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
 
 Во всех случаях вычисленное значение лежит в области допустимой погрешности
@@ -96,9 +96,9 @@ main:
     ; start();
     call start
 
-    ; printf("Calculated result: %.3f\n", x);
+    ; printf("Calculated result: %.3f\n", next_x);
     mov rdi, strCalcRes
-    movsd xmm0, [x]
+    movsd xmm0, [next_x]
     mov eax, 1
     call printf
 
@@ -157,14 +157,14 @@ start:
         call getNext
         movsd qword [next_x], xmm0
 
-        ; while (abs(next_x - x) * 100 / x > epsilon)
+        ; while (abs(next_x - x) * 100 / next_x > epsilon)
         fld qword [epsilon]
         fld qword [next_x]
         fld qword [x]
         fsubp st1, st0
         fild dword [hundred]
         fmulp st1, st0
-        fld qword [x]
+        fld qword [next_x]
         fdivp st1, st0
         fabs
 

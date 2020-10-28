@@ -58,9 +58,9 @@ main:
     ; start();
     call start
 
-    ; printf("Calculated result: %.3f\n", x);
+    ; printf("Calculated result: %.3f\n", next_x);
     mov rdi, strCalcRes
-    movsd xmm0, [x]
+    movsd xmm0, [next_x]
     mov eax, 1
     call printf
 
@@ -119,14 +119,14 @@ start:
         call getNext
         movsd qword [next_x], xmm0
 
-        ; while (abs(next_x - x) * 100 / x > epsilon)
+        ; while (abs(next_x - x) * 100 / next_x > epsilon)
         fld qword [epsilon]
         fld qword [next_x]
         fld qword [x]
         fsubp st1, st0
         fild dword [hundred]
         fmulp st1, st0
-        fld qword [x]
+        fld qword [next_x]
         fdivp st1, st0
         fabs
 
