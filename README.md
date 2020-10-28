@@ -10,7 +10,7 @@
 
 #### Суть алгоритма
 1) Сделать предположение <img src="https://render.githubusercontent.com/render/math?math=x_0">;
-2) Задать <img src="https://render.githubusercontent.com/render/math?math=x_{k+1}=\frac{1}{n} \left( (n-1)x_k + \frac{A}{x_k^{n-1}} \right)">, где в нашем случае <img src="https://render.githubusercontent.com/render/math?math=n = 3">;
+2) Задать <img src="https://render.githubusercontent.com/render/math?math=x_{k + 1}=\frac{1}{n} \left( (n-1)x_k + \frac{A}{x_k^{n-1}} \right)">, где в нашем случае <img src="https://render.githubusercontent.com/render/math?math=n = 3">;
 3) Повторять шаг 2, пока не будет достигнута необходимая точность.
 
 ### Компиляция и сборка
