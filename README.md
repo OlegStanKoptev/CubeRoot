@@ -5,6 +5,17 @@
 ## Вариант 10. Коптев Олег Станиславович
 Разработать программу вычисления корня кубического из заданного числа согласно быстросходящемуся итерационному алгоритму определения корня n-ной степени с точностью не хуже 0,05% (использовать FPU)
 
+### Компиляция и сборка
+Компилируется при помощи вызова `fasm app.asm`, собирается `gcc app.o -o app -lm` (флаг `-lm` нужен, чтобы использовать библиотеку `math.h`)
+
+### Пример работы
+Ниже представлены несколько вариантов входных данных и соответствующие результаты исполнения:
+![picture 1](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/1.png)
+![picture 2](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/2.png)
+![picture 3](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/3.png)
+![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
+![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
+
 ```Assembly
 format ELF64
 public main
