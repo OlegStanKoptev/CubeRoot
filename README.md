@@ -4,6 +4,7 @@
 
 ## Вариант 10. Коптев Олег Станиславович
 Разработать программу вычисления корня кубического из заданного числа согласно быстросходящемуся итерационному алгоритму определения корня n-ной степени с точностью не хуже 0,05% (использовать FPU)
+
 ```Assembly
 format ELF64
 public main
@@ -13,31 +14,29 @@ extrn scanf
 extrn cbrt
 
 section '.data' writable
-    strFloatOutput    db    '%.5f', 10, 0
+    strFloatOutput  db  '%.5f', 10, 0
 
-    strStart        db     'Program for counting cube root with the precision of %.2f', 10, 0
-    strInFloat        db    'Please enter the number: ', 0
-    strScanFloat    db    '%lf', 0
-    strCalcRes        db     'Calculated result: %.3f', 10, 0
-    strTrueRes        db    'True result using cbrt(): %.3f', 10, 0
-    strFiller        db    'Starting the algorithm...', 10, 0
+    strStart        db  'Program for counting cube root with the precision of %.2f', 10, 0
+    strInFloat      db  'Please enter the number: ', 0
+    strScanFloat    db  '%lf', 0
+    strCalcRes      db  'Calculated result: %.3f', 10, 0
+    strTrueRes      db  'True result using cbrt(): %.3f', 10, 0
+    strFiller       db  'Listing approximations...', 10, 0
 
-    strIterPhrase   db  '%d: %f', 10, 0
+    strIterPhrase   db  9, '%d: %f', 10, 0
 
-    A                 dq  ?
-    tempA            dq  ?
-    delta             dq  0.05
-    x                 dq  ?
-    temp_x            dq  ?
-    input_A            dq  ?
-    next_x             dq  ?
+    A               dq  ?
+    tempA           dq  ?
+    delta           dq  0.05
+    x               dq  ?
+    temp_x          dq  ?
+    input_A         dq  ?
+    next_x          dq  ?
     true_val        dq  ?
-    counter            dd     0
+    counter         dd  0
 
     two             dd  2
     three           dd  3
-
-    value            dq  1.6
 
 section '.code' writable 
 main:
@@ -152,4 +151,5 @@ getNext:
 
     mov rax, [tempA]
     ret
+
 ```
