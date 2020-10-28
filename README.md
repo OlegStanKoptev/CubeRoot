@@ -8,6 +8,8 @@
 ### Алгоритм
 Для нахождения кубического корня используется [алгоритм нахождения корня n-ной степени](https://ru.wikipedia.org/wiki/Алгоритм_нахождения_корня_n-ной_степени).
 
+Для определения точности вычисления используется такая проверка: <img src="https://render.githubusercontent.com/render/math?math=\frac{|x_k - x_{k-1}| \cdot 100}{x_k}">
+
 #### Суть алгоритма
 1) Сделать предположение <img src="https://render.githubusercontent.com/render/math?math=x_0">;
 2) Задать <img src="https://render.githubusercontent.com/render/math?math=x_{k%2B1}=\frac{1}{n}%20\left(%20(n-1)x_k%20%2B%20\frac{A}{x_k^{n-1}}%20\right)">, где в нашем случае <img src="https://render.githubusercontent.com/render/math?math=n = 3">;
@@ -19,15 +21,15 @@
 ### Пример работы
 Ниже представлены несколько вариантов входных данных и соответствующие результаты исполнения:
 
-Исходное число: 8, результат: 2.011
+Исходное число: 8, результат: 2.000056
 ![picture 1](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/1.png)
-Исходное число: 970299, результат: 99
+Исходное число: 970299, результат: 99.000044
 ![picture 2](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/2.png)
-Исходное число: -27, результат: -3.037
+Исходное число: -27, результат: -3.000454
 ![picture 3](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/3.png)
 Исходное число: 0, результат: 0
 ![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
-Исходное число: 99999999999999, результат: 46415.888
+Исходное число: 99999999999999, результат: 46416.322430
 ![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
 
 Во всех случаях вычисленное значение лежит в области допустимой погрешности
@@ -45,18 +47,18 @@ extrn scanf
 extrn cbrt
 
 section '.data' writable
-    strStart        db  'Program for counting cube root with the precision of %.2f', 10, 0
+    strStart        db  'Program for counting cube root with the precision of %.2f%', 10, 0
     strInFloat      db  'Please enter the number: ', 0
     strScanFloat    db  '%lf', 0
-    strCalcRes      db  'Calculated result: %.3f', 10, 0
-    strTrueRes      db  'True result using cbrt(): %.3f', 10, 0
+    strCalcRes      db  'Calculated result: %f', 10, 0
+    strTrueRes      db  'True result using cbrt(): %f', 10, 0
     strFiller       db  'Listing approximations...', 10, 0
 
     strIterPhrase   db  9, '%d: %f', 10, 0
 
     A               dq  ?
     tempA           dq  ?
-    delta           dq  0.05
+    epsilon         dq  0.05
     x               dq  ?
     tempX           dq  ?
     input_A         dq  ?
@@ -66,13 +68,14 @@ section '.data' writable
 
     two             dd  2
     three           dd  3
+    hundred         dd  100
 
 section '.code' writable 
 main:
-    ; printf("Program for counting cube root with the precision of %.2f\n", delta);
+    ; printf("Program for counting cube root with the precision of %.2f\n", epsilon);
     sub rsp, 40
     mov rdi, strStart
-    movsd xmm0, [delta]
+    movsd xmm0, [epsilon]
     mov eax, 1
     call printf
 
@@ -154,12 +157,17 @@ start:
         call getNext
         movsd qword [next_x], xmm0
 
-        ; while (abs(next_x - x) > delta)
-        fld qword [delta]
+        ; while (abs(next_x - x) * 100 / x > epsilon)
+        fld qword [epsilon]
         fld qword [next_x]
         fld qword [x]
         fsubp st1, st0
+        fild dword [hundred]
+        fmulp st1, st0
+        fld qword [x]
+        fdivp st1, st0
         fabs
+
         fcomi st1
         jb exit
 
