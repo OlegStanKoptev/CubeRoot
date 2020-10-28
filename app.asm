@@ -13,9 +13,9 @@ section '.data' writable
     strScanFloat    db  '%lf', 0
     strCalcRes      db  'Calculated result: %.3f', 10, 0
     strTrueRes      db  'True result using cbrt(): %.3f', 10, 0
-    strFiller       db  'Starting the algorithm...', 10, 0
+    strFiller       db  'Listing approximations...', 10, 0
 
-    strIterPhrase   db  '%d: %f', 10, 0
+    strIterPhrase   db  9, '%d: %f', 10, 0
 
     A               dq  ?
     tempA           dq  ?
@@ -29,8 +29,6 @@ section '.data' writable
 
     two             dd  2
     three           dd  3
-
-    value           dq  1.6
 
 section '.code' writable 
 main:
@@ -145,4 +143,3 @@ getNext:
 
     mov rax, [tempA]
     ret
-    
