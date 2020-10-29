@@ -8,7 +8,7 @@
 ### Алгоритм
 Для нахождения кубического корня используется [алгоритм нахождения корня n-ной степени](https://ru.wikipedia.org/wiki/Алгоритм_нахождения_корня_n-ной_степени).
 
-Для определения точности вычисления используется такая проверка: <img src="https://render.githubusercontent.com/render/math?math=\frac{|x_k - x_{k-1}| \cdot 100}{x_k} < 0.05">
+Для определения точности вычисления используется такая проверка: <img src="https://render.githubusercontent.com/render/math?math=\frac{100 \cdot |x_k - x_{k-1}|}{x_k} < 0.05">
 
 #### Суть алгоритма
 1) Сделать предположение <img src="https://render.githubusercontent.com/render/math?math=x_0">;
