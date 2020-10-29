@@ -40,7 +40,7 @@ section '.code' writable
 ; Calling the function to process the input information
 ; That function makes first assumption: x / 3
 ; Then it counts the next member of the sequence and checks if its precision is good enough
-; In case the difference is bigger than 0.05% we repeat the previuos step
+; In case the difference is bigger than 0.05% we repeat the previous step
 ; In the other case we finish the processing step and just output the calculated number
 
 main:
