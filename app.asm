@@ -28,6 +28,7 @@ section '.data' writable
     true_val        dq  ?
     counter         dd  0
 
+    zero            dd  0
     two             dd  2
     three           dd  3
     hundred         dd  100
@@ -119,6 +120,12 @@ start:
         call getNext
         movsd qword [next_x], xmm0
 
+        ; if (next_x == null) goto reset_x;
+        fld qword [next_x]
+        fcomi st1
+        jp reset_x
+        fstp st0
+
         ; while (abs(next_x - x) * 100 / next_x > epsilon)
         fld qword [epsilon]
         fld qword [next_x]
@@ -144,6 +151,9 @@ start:
         mov [counter], edx
 
         jmp .iter
+reset_x:
+    fild dword [zero]
+    fstp qword [next_x]
 exit:
     ret
 

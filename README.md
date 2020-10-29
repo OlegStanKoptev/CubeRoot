@@ -27,7 +27,7 @@
 ![picture 2](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/2.png)
 Исходное число: -27, результат: -3.000000
 ![picture 3](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/3.png)
-Исходное число: 0, результат: nan (потому что при сравнении точности есть деление на значение элемента)
+Исходное число: 0, результат: 0
 ![picture 4](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/4.png)
 Исходное число: 99999999999999, результат: 46415.888340
 ![picture 5](https://raw.githubusercontent.com/OlegStanKoptev/CubeRoot/master/images/5.png)
@@ -66,6 +66,7 @@ section '.data' writable
     true_val        dq  ?
     counter         dd  0
 
+    zero            dd  0
     two             dd  2
     three           dd  3
     hundred         dd  100
@@ -157,6 +158,12 @@ start:
         call getNext
         movsd qword [next_x], xmm0
 
+        ; if (next_x == null) goto reset_x;
+        fld qword [next_x]
+        fcomi st1
+        jp reset_x
+        fstp st0
+
         ; while (abs(next_x - x) * 100 / next_x > epsilon)
         fld qword [epsilon]
         fld qword [next_x]
@@ -182,6 +189,9 @@ start:
         mov [counter], edx
 
         jmp .iter
+reset_x:
+    fild dword [zero]
+    fstp qword [next_x]
 exit:
     ret
 
