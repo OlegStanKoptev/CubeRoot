@@ -33,7 +33,16 @@ section '.data' writable
     three           dd  3
     hundred         dd  100
 
-section '.code' writable 
+section '.code' writable
+
+; We start with several phrases for a user to understand what the program does
+; Then we get a double number from user
+; Calling the function to process the input information
+; That function makes first assumption: x / 3
+; Then it counts the next member of the sequence and checks if its precision is good enough
+; In case the difference is bigger than 0.05% we repeat the previuos step
+; In the other case we finish the processing step and just output the calculated number
+
 main:
     ; printf("Program for counting cube root with the precision of %.2f\n", epsilon);
     sub rsp, 40
